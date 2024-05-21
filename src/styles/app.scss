@@ -1,0 +1,19 @@
+* {
+    user-select: none;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    font-size: 14rem;
+}
+
+@media screen and (min-width: 500px) {
+    #root {
+        width: 500px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
