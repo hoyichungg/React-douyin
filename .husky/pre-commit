@@ -1,1 +1,1 @@
-npm lint
+pnpm run lint
