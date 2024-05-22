@@ -1,0 +1,22 @@
+.slider-container {
+    // overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.slider-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    touch-action: none;
+    transition: height 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-item {
+    height: 100%;
+    width: 100%;
+    flex-shrink: 0;
+    position: relative;
+}

@@ -1,9 +1,11 @@
 import React from 'react'
+import HorizontalSlider from '../../components/Slide/HorizontalSlider';
+import SliderItem from '../../components/Slide/SliderItem';
 
 const Home = () => {
   return (
     <div>
-        home
+        <HorizontalSlider render={SliderItem} />
     </div>
   );
 };
