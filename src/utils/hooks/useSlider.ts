@@ -21,6 +21,7 @@ const useSlider = (sliderType: number) => {
     wrapper: { width: 0, height: 0, childrenLength: 0 }
   });
 
+  // 偵測對應方向上能否允許滑動,例如SlideHorizontal元件就只處理左右滑動事件,SlideVertical只處理上下滑動事件
   const canSlide = () => {
     // 每次都需要檢查,up事件會重製會重製true
     if (state.needCheck) {
