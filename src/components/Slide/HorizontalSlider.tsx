@@ -1,13 +1,18 @@
 // import React, { useState, useRef, useEffect } from 'react';
-
-import useSlider from '../../hooks/useSlider';
+import { SlideType } from '../../utils/const_var';
+import useSlider from '../../utils/hooks/useSlider';
 
 import '../../styles/components/Slide/HorizontalSlider.scss';
 
-const HorizontalSlider = ({ render }) => {
-  const { wrapperEl, slideTouchStart } = useSlider();
+const HorizontalSlider = ({ name, render }) => {
+  const { wrapperEl, slideTouchStart, slideTouchMove } = useSlider(SlideType.HORIZONTAL);
+
   const touchStart = (e) => {
-    slideTouchStart(e, wrapperEl.current);
+    slideTouchStart(e, wrapperEl.current, name);
+  }
+
+  const touchMove = (e) => {
+    slideTouchMove(e, wrapperEl.current, name);
   }
 
   return (
@@ -16,12 +21,9 @@ const HorizontalSlider = ({ render }) => {
         className="slider-wrapper"
         ref={wrapperEl}
         onPointerDown={touchStart}
+        onPointerMove={touchMove}
       >
-        {Array.from({ length: 5 }).map((_, index) => (
-          <div className="slider-item" key={index}>
-            {render(index)}
-          </div>
-        ))}
+        {render}
       </div>
     </div>
   );
