@@ -21,8 +21,11 @@ const useSlider = (sliderType: number) => {
     wrapper: { width: 0, height: 0, childrenLength: 0 }
   });
 
-  // 偵測對應方向上能否允許滑動,例如SlideHorizontal元件就只處理左右滑動事件,SlideVertical只處理上下滑動事件
-  const canSlide = () => {
+  /**
+   * 偵測對應方向上能否允許滑動,例如SlideHorizontal元件就只處理左右滑動事件,SlideVertical只處理上下滑動事件
+   * @returns {boolean}
+   */
+  const canSlide = (): boolean => {
     // 每次都需要檢查,up事件會重製會重製true
     if (state.needCheck) {
       // 判斷move x和y的距離是否大於判斷值,因為距離太小無法判斷滑動方向
@@ -51,6 +54,25 @@ const useSlider = (sliderType: number) => {
     )
   }
 
+  /**
+   * 根據當前index,獲取slide偏移距離
+   * 如果每個頁面的寬度是相同都是100%,只需要當前index * wrapper的寬(高)即可:localIndex * wrapper.width
+   */
+  const getSlideOffset = (el: HTMLDivElement) => {
+    if (state.type === SlideType.HORIZONTAL) {
+      let widths = []
+      // 獲取所有子元素的寬度
+      Array.from(el.children).map((v) => {
+        widths.push(v.getBoundingClientRect().width)
+      })
+      // 取0到當前index的子元素的寬度
+      widths = widths.slice(0, state.localIndex)
+      if (widths.length) {
+        return -widths.reduce((a, b) => a + b)
+      }
+      return 0
+    }
+  }
 
   /**
    * 開始滑動
@@ -58,7 +80,7 @@ const useSlider = (sliderType: number) => {
    * @param el
    * @param name
   */
-  const slideTouchStart = (e, el, name) => {
+  const slideTouchStart = (e, el: HTMLDivElement, name: string) => {
     if (!checkEvent(e)) return
     _css(el, 'transition-duration', `0ms`)
     setState(prevState => ({
@@ -73,7 +95,6 @@ const useSlider = (sliderType: number) => {
     }))
   }
 
-
   /**
    * move事件
    * @param e
@@ -85,11 +106,11 @@ const useSlider = (sliderType: number) => {
   */
   const slideTouchMove = (
     e,
-    el,
-    name,
+    el: HTMLDivElement,
+    name: string,
     canNextCb = null,
     notNextCb = null,
-    // slideOtherDirectionCb = null
+    slideOtherDirectionCb = null
   ) => {
     if (!checkEvent(e)) return
     if (!state.isDown) return
@@ -113,22 +134,55 @@ const useSlider = (sliderType: number) => {
       if (canNextCb(isNext)) {
         window.isMoved = true
         // 能滑動,就把事件捕獲,不能給父組件處裡
-        e.stopPropagation(e)
+        // e.stopPropagation(e)
         if (state.type === SlideType.HORIZONTAL) {
-          emit(state.type, state.name + '-moveX', state.move.x)
+          emit(state.type, name + '-moveX', state.move.x)
         }
+        // 獲取偏移量
+        const t = getSlideOffset(el) + (isNext ? state.judgeValue : -state.judgeValue)
+        let dx1 = 0, dx2 = 0;
+        // 偏移量加當前手指頭移動的距離就是slide要偏移的值
+        if (state.type === SlideType.HORIZONTAL) {
+          dx1 = t + state.move.x
+        } else {
+          dx2 = t + state.move.y
+        }
+        _css(el, 'transition-duration', `0ms`)
+        _css(el, 'transform', `translate3d(${dx1}px, ${dx2}px, 0)`)
+      } else {
+        notNextCb?.()
       }
-
     } else {
-      notNextCb?.()
+      slideOtherDirectionCb?.(e)
     }
   }
+
+  /**
+   * 滑動結束事件
+   * @param e
+   * @param canNextCb
+   * @param nextCb
+   * @param notNextCb
+   * @returns {*}
+   */
+  // const slideTouchEnd = (e, canNextCb = null, nextCb = null, notNextCb = null) => {
+  //   if (!checkEvent(e)) return
+  //   if (!state.isDown) return
+
+  //   if (state.next) {
+  //     const isHorizontal = state.type === SlideType.HORIZONTAL
+  //     const isNext = isHorizontal ? state.move.x < 0 : state.move.y < 0
+
+  //     if(!canNextCb) canNextCb = canNext
+  //   }
+  // }
 
   return {
     state,
     wrapperEl,
     slideTouchStart,
-    slideTouchMove
+    slideTouchMove,
+    slideTouchEnd
   }
 }
 
