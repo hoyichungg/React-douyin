@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { checkEvent } from '../check';
 import { _css } from '../dom';
 import { SlideType } from '../const_var';
@@ -20,6 +20,49 @@ const useSlider = (sliderType: number) => {
     move: { x: 0, y: 0 },
     wrapper: { width: 0, height: 0, childrenLength: 0 }
   });
+
+  /**
+   * 初始化
+   */
+  useEffect(() => {
+    const el = wrapperEl.current;
+    if (!el) return;
+
+    const updateDimensions = () => {
+      setState(prevState => ({
+        ...prevState,
+        wrapper: {
+          ...prevState.wrapper,
+          width: _css(el, 'width'),
+          height: _css(el, 'height'),
+          childrenLength: el.children.length
+        }
+      }));
+    };
+
+    updateDimensions(); // 初始化尺寸
+
+    // 監聽resize事件以更新尺寸
+    window.addEventListener('resize', updateDimensions);
+
+    return () => {
+      window.removeEventListener('resize', updateDimensions);
+    };
+  }, []);
+
+  //機算偏移量transform
+  useEffect(() => {
+    if (!wrapperEl.current) return;
+
+    const t = getSlideOffset(wrapperEl.current);
+    let dx1 = 0, dx2 = 0;
+    if (state.type === SlideType.HORIZONTAL) {
+      dx1 = t;
+    } else {
+      dx2 = t;
+    }
+    _css(wrapperEl.current, 'transform', `translate3d(${dx1}px, ${dx2}px, 0)`);
+  }, [state.type]);  // 響應類型變化
 
   /**
    * 偵測對應方向上能否允許滑動,例如SlideHorizontal元件就只處理左右滑動事件,SlideVertical只處理上下滑動事件
@@ -62,6 +105,8 @@ const useSlider = (sliderType: number) => {
     if (state.type === SlideType.HORIZONTAL) {
       let widths = []
       // 獲取所有子元素的寬度
+      console.log('el.children', el);
+
       Array.from(el.children).map((v) => {
         widths.push(v.getBoundingClientRect().width)
       })
@@ -165,24 +210,95 @@ const useSlider = (sliderType: number) => {
    * @param notNextCb
    * @returns {*}
    */
-  // const slideTouchEnd = (e, canNextCb = null, nextCb = null, notNextCb = null) => {
-  //   if (!checkEvent(e)) return
-  //   if (!state.isDown) return
+  const slideTouchEnd = (e, canNextCb = null, nextCb = null, notNextCb = null) => {
+    if (!checkEvent(e)) return
+    if (!state.isDown) return
 
-  //   if (state.next) {
-  //     const isHorizontal = state.type === SlideType.HORIZONTAL
-  //     const isNext = isHorizontal ? state.move.x < 0 : state.move.y < 0
+    if (state.next) {
+      const isHorizontal = state.type === SlideType.HORIZONTAL
+      const isNext = isHorizontal ? state.move.x < 0 : state.move.y < 0
 
-  //     if(!canNextCb) canNextCb = canNext
-  //   }
-  // }
+      if (!canNextCb) canNextCb = canNext
+      if (canNextCb(isNext)) {
+        const endTime = Date.now()
+        let gapTime = endTime - state.start.time
+        const distance = isHorizontal ? state.move.x : state.move.y
+        const judgeValue = isHorizontal ? state.wrapper.width : state.wrapper.height
+        // 1.距離太短,直接不通過
+        if (Math.abs(distance) < 20) gapTime = 1000
+        // 2.距離太長,直接通過
+        if (Math.abs(distance) > judgeValue / 3) gapTime = 100
+        // 3.若不再上述兩種狀況,只需要判斷時間即可
+        if (gapTime < 150) {
+          if (isNext) {
+            state.localIndex++
+          }
+          else {
+            state.localIndex--
+          }
+          return nextCb?.(isNext)
+        }
+      } else {
+        return notNextCb?.()
+      }
+    } else {
+      notNextCb?.()
+    }
+  }
+
+  /**
+   * 結束後重製變量
+   * @param e
+   * @param el
+   * @param name
+   */
+  const slideReset = (e, el: HTMLDivElement, name: string,) => {
+    if (!checkEvent(e)) return
+
+    _css(el, 'transition-duration', `300ms`)
+
+    const t = getSlideOffset(el)
+    let dx1 = 0
+    let dx2 = 0
+    if (state.type === SlideType.HORIZONTAL) {
+      emit(name + '-end', state.localIndex)
+      dx1 = t
+    } else {
+      emit(name + '-end')
+      dx2 = t
+    }
+    _css(el, 'transform', `translate3d(${dx1}px, ${dx2}px, 0)`)
+    setState(prevState => ({
+      ...prevState,
+      start: {
+        ...prevState.start,
+        x: 0,
+        y: 0,
+        time: 0
+      },
+      move: {
+        ...prevState.move,
+        x: 0,
+        y: 0
+      },
+      next: false,
+      needCheck: true,
+      isDown: false
+    }));
+
+    setTimeout(() => {
+      window.isMoved = false
+    }, 200)
+    emit?.('update:index', state.localIndex)
+  }
 
   return {
     state,
     wrapperEl,
     slideTouchStart,
     slideTouchMove,
-    slideTouchEnd
+    slideTouchEnd,
+    slideReset
   }
 }
 

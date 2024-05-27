@@ -5,7 +5,7 @@ import useSlider from '../../utils/hooks/useSlider';
 import '../../styles/components/Slide/HorizontalSlider.scss';
 
 const HorizontalSlider = ({ name, render }) => {
-  const { wrapperEl, slideTouchStart, slideTouchMove, slideTouchEnd } = useSlider(SlideType.HORIZONTAL);
+  const { wrapperEl, slideTouchStart, slideTouchMove, slideTouchEnd, slideReset } = useSlider(SlideType.HORIZONTAL);
 
   const touchStart = (e) => {
     slideTouchStart(e, wrapperEl.current, name);
@@ -16,7 +16,8 @@ const HorizontalSlider = ({ name, render }) => {
   }
 
   const touchEnd = (e) => {
-    slideTouchEnd(e)
+    slideTouchEnd(e);
+    slideReset(e, wrapperEl.current, name)
   }
 
   return (

@@ -3,16 +3,17 @@ import React from 'react'
 const IndicatorHome = () => {
   return (
     <>
-      <div>IndicatorHome</div>
-      <div>IndicatorHome</div>
-      <div>IndicatorHome</div>
-      <div>IndicatorHome</div>
-      <div>IndicatorHome</div>
-      <div>IndicatorHome</div>
-      <div>IndicatorHome</div>
-      <div>IndicatorHome</div>
-      <div>IndicatorHome</div>
-      <div>IndicatorHome</div>
+      <p>IndicatorHome</p>
+      <p>IndicatorHome</p>
+      <p>IndicatorHome</p>
+      <p>IndicatorHome</p>
+      <p>IndicatorHome</p>
+      <p>IndicatorHome</p>
+      <p>IndicatorHome</p>
+      <p>IndicatorHome</p>
+      <p>IndicatorHome</p>
+      <p>IndicatorHome</p>
+      <p>IndicatorHome</p>
     </>
   )
 }
