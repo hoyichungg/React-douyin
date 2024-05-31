@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+import enums from '../../enums'
+import { friends, panel } from '../../../api/user';
 
 const useStore = create(devtools((set) => ({
     bodyHeight: document.body.clientHeight,
@@ -13,17 +15,60 @@ const useStore = create(devtools((set) => ({
     loading: false,
     routeData: null,
     users: [],
-    userinfo: {},
+    userinfo: {
+        nickname: '',
+        desc: '',
+        user_age: '',
+        signature: '',
+        unique_id: '',
+        province: '',
+        city: '',
+        gender: '',
+        school: {
+            name: '',
+            department: null,
+            joinTime: null,
+            education: null,
+            displayType: enums.DISPLAY_TYPE.ALL
+        },
+        avatar_168x168: {
+            url_list: []
+        },
+        avatar_300x300: {
+            url_list: []
+        },
+        cover_url: [{
+            url_list: []
+        }],
+        white_cover_url: [{
+            url_list: []
+        }]
+    },
     friends: [],
 
-    setMaskDialog: (isOpen) => set({ maskDialog: isOpen }),
-    toggleMaskDialog: () => set(state => ({ maskDialog: !state.maskDialog })),
-    setUserInfo: (userInfo) => set({ userinfo: userInfo }),
-    setUsers: (users) => set({ users }),
-    addFriend: (friend) => set(state => ({ friends: [...state.friends, friend] })),
-    removeFriend: (name) => set(state => ({
-        friends: state.friends.filter(friend => friend.name !== name)
-    })),
+    // Actions
+    init: async () => {
+        const panelData = await panel();
+        if (panelData.success) {
+            set(state => ({ userinfo: { ...state.userinfo, ...panelData.data } }));
+        }
+        const friendsData = await friends();
+        if (friendsData.success) {
+            set({ users: friendsData.data });
+        }
+    },
+    setUserinfo: (val) => set({ userinfo: val }),
+    setMaskDialog: (val, mode = 'dark') => set({ maskDialog: val, maskDialogMode: mode }),
+    updateExcludeNames: (val) => {
+        set(state => {
+            if (val.type === 'add' && !state.excludeStories.includes(val.value)) {
+                return { excludeNames: [...state.excludeNames, val.value] };
+            } else {
+                return { excludeNames: state.excludeNames.filter(item => item !== val.value) };
+            }
+        });
+    },
+    toggleMaskDialog: () => set(state => ({ maskDialog: !state.maskIdalog })),
     updateBodyDimensions: () => set({
         bodyHeight: document.body.clientHeight,
         bodyWidth: document.body.clientWidth
