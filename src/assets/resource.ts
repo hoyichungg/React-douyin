@@ -1,6 +1,6 @@
-import { ApiMethod } from '../utils/ApiMethod.ts'
+import { ApiMethod } from '../utils/const_var.ts'
 
-export default {
+const resource = {
   videos: [],
   my: [],
   users: {
@@ -756,3 +756,5 @@ export default {
     }
   ]
 }
+
+export default resource

@@ -30,7 +30,6 @@ export function _css(el, key, value?) {
         }
       }
     }
-    console.log(value)
     if (key === 'transform') {
       el.style.webkitTransform =
         el.style.MsTransform =

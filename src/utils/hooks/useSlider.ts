@@ -105,8 +105,6 @@ const useSlider = (sliderType: number) => {
     if (state.type === SlideType.HORIZONTAL) {
       let widths = []
       // 獲取所有子元素的寬度
-      console.log('el.children', el);
-
       Array.from(el.children).map((v) => {
         widths.push(v.getBoundingClientRect().width)
       })

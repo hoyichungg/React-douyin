@@ -38,8 +38,6 @@ const useEventBus = () => {
   };
 
   const emit = (eventType, val) => {
-    console.log('eventTypeeventType', eventType);
-
     const listeners = events.get(eventType);
     if (listeners) {
       listeners.forEach((cb) => {

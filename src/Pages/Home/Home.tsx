@@ -4,7 +4,10 @@ import SliderItem from '../../components/Slide/SliderItem';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import IndicatorHome from './components/IndicatorHome';
 
+// import useStore from '../../utils/hooks/store/useStore';
+
 const Home = () => {
+  //const { maskDialog, toggleMaskDialog, users, addFriend } = useStore();
   const components = [Sidebar, IndicatorHome];
 
   return (
