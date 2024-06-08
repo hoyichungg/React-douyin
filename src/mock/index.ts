@@ -12,7 +12,25 @@ const allRecommendVideos = posts6.map((v) => {
 console.log('allRecommendVideos', allRecommendVideos)
 
 export async function startMock() {
+  mock.onGet('/video/recommended').reply(async (config) => {
+    const { start, pageSize } = config.params
+    console.log('/video/recommended', config)
+    return [
+      200,
+      {
+        data: {
+          total: 844,
+          list: allRecommendVideos.slice(start, start + pageSize) // list: allRecommendVideos.slice(0, 6),
+        },
+        code: 200,
+        msg: ''
+      }
+    ]
+  })
+  
   mock.onGet('/user/collect').reply(async () => {
+    console.log('/user/collect');
+    
     return [
       200,
       {

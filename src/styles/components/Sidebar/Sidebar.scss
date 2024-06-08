@@ -1,0 +1,9 @@
+.sidebar {
+  touch-action: pan-y;
+  height: calc(var(--vh, 1vh) * 100);
+  overflow: auto;
+  background: rgb(22, 22, 22);
+  padding: 10rem;
+  padding-bottom: 20rem;
+  box-sizing: border-box;
+}

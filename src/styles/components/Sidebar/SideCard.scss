@@ -1,0 +1,62 @@
+.sideCard {
+  margin-top: 10rem;
+  border-radius: 12rem;
+  padding: 15rem;
+  background: rgb(29, 29, 29);
+
+  .header {
+    margin-bottom: 8rem;
+    font-size: 14rem;
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+
+    .right {
+      display: flex;
+      align-items: center;
+      font-size: 12rem;
+      gap: 4rem;
+      color: gray;
+
+      svg {
+        font-size: 16rem;
+      }
+    }
+  }
+
+  .content {
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    .item {
+      min-height: 20vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 14rem;
+      gap: 8rem;
+
+      svg {
+        font-size: 28rem;
+      }
+
+      .xcx {
+        border-radius: 12rem;
+        width: 50rem;
+        height: 50rem;
+      }
+    }
+
+    .avatar {
+      height: 25vw;
+
+      img {
+        border-radius: 50%;
+        width: 50rem;
+      }
+    }
+  }
+}

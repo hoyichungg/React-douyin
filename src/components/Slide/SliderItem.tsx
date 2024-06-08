@@ -1,9 +1,9 @@
-import React from 'react';
+// import React from 'react';
 
 const SliderItem = (components) => (
   <>
     {components.map((Component, index) => (
-      <div className="slider-item" key={index}>
+      <div className="slider-item" data-index={index} key={index}>
         <Component />
       </div>
     ))}
