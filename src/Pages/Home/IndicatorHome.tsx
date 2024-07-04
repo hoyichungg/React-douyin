@@ -26,7 +26,7 @@ const IndicatorHome = () => {
             </div>
             <div className="tab" >
               <span>關注</span>
-              <img src="../../../public/images/icon/live.webp" className="tab2-img" />
+              <img src="/images/icon/live.webp" className="tab2-img" />
             </div>
             <div className="tab" >
               <span>經驗</span>
