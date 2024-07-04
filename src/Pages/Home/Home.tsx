@@ -2,7 +2,7 @@ import React from 'react'
 import HorizontalSlider from '../../components/Slide/HorizontalSlider';
 import SliderItem from '../../components/Slide/SliderItem';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import IndicatorHome from './components/IndicatorHome';
+import IndicatorHome from './IndicatorHome';
 
 // import useStore from '../../utils/hooks/store/useStore';
 

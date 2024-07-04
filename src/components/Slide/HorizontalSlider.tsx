@@ -1,11 +1,16 @@
-// import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { SlideType } from '../../utils/const_var';
 import useSlider from '../../utils/hooks/useSlider';
 
 import '../../styles/components/Slide/HorizontalSlider.scss';
 
 const HorizontalSlider = ({ name, render }) => {
-  const { wrapperEl, slideTouchStart, slideTouchMove, slideTouchEnd, slideReset } = useSlider(SlideType.HORIZONTAL);
+  const { state, wrapperEl, slideTouchStart, slideTouchMove, slideTouchEnd, slideReset } = useSlider(SlideType.HORIZONTAL);
+
+  // useEffect(() => {
+  //   console.log('state', state);
+
+  // }, [])
 
   const touchStart = (e) => {
     slideTouchStart(e, wrapperEl.current, name);

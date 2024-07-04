@@ -27,6 +27,7 @@ const useSlider = (sliderType: number) => {
   useEffect(() => {
     const el = wrapperEl.current;
     if (!el) return;
+    console.log('el', el);
 
     const updateDimensions = () => {
       setState(prevState => ({
@@ -62,6 +63,8 @@ const useSlider = (sliderType: number) => {
       dx2 = t;
     }
     _css(wrapperEl.current, 'transform', `translate3d(${dx1}px, ${dx2}px, 0)`);
+    // console.log('ss', state);
+
   }, [state.type]);  // 響應類型變化
 
   /**
