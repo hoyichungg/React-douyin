@@ -37,8 +37,14 @@ const IndicatorHome = () => {
           </div>
           <div className="indicator"></div>
         </div>
+        <Icon
+          // v-hide="loading"
+          icon="ion:search"
+          className="search"
+        // @click="$router.push('/home/search')"
+        />
       </div>
-    </div>
+    </div >
   )
 }
 
