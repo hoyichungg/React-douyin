@@ -9,7 +9,7 @@ const allRecommendVideos = posts6.map((v) => {
   v.type = 'recommend-video'
   return v
 })
-console.log('allRecommendVideos', allRecommendVideos)
+// console.log('allRecommendVideos', allRecommendVideos)
 
 export async function startMock() {
   mock.onGet('/video/recommended').reply(async (config) => {

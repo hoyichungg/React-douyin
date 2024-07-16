@@ -1,5 +1,12 @@
 // import React from 'react'
 // import { userCollect } from '../../../api/user';
+import SliderHorizontal from '../../components/Slide/SliderHorizontal';
+import SliderItem from '../../components/Slide/SliderItem';
+// import Sidebar from '../../components/Sidebar/Sidebar';
+import { Test0 } from '../../components/Test/Test0';
+import { Test1 } from '../../components/Test/Test1';
+import Test2 from '../../components/Test/Test2';
+
 import { Icon } from '@iconify/react'
 
 import '../../styles/components/Pages/Home/IndicatorHome.scss';
@@ -7,6 +14,7 @@ import '../../styles/components/Pages/Home/IndicatorHome.scss';
 const IndicatorHome = () => {
   // const { data, isLoading, error } = userCollect();
   // console.log(data);
+  const components = [Test0, Test1, Test2];
   return (
     <div className="indicator-home">
       <div className="toolbar">
@@ -44,6 +52,8 @@ const IndicatorHome = () => {
         // @click="$router.push('/home/search')"
         />
       </div>
+
+      <SliderHorizontal name='second' render={SliderItem(components, 'second')} />
     </div >
   )
 }

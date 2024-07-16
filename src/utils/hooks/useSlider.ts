@@ -24,6 +24,7 @@ const useSlider = (sliderType: number) => {
   /**
    * 初始化
    */
+
   useEffect(() => {
     const el = wrapperEl.current;
     if (!el) return;
@@ -59,13 +60,19 @@ const useSlider = (sliderType: number) => {
     let dx1 = 0, dx2 = 0;
     if (state.type === SlideType.HORIZONTAL) {
       dx1 = t;
+      console.log(1);
+      
     } else {
       dx2 = t;
+      console.log(2);
+      
     }
     _css(wrapperEl.current, 'transform', `translate3d(${dx1}px, ${dx2}px, 0)`);
-    // console.log('ss', state);
+    console.log('dx1', dx1);
 
-  }, [state.type]);  // 響應類型變化
+  console.log('dx2', dx2);
+
+  }, []);  // 響應類型變化
 
   /**
    * 偵測對應方向上能否允許滑動,例如SlideHorizontal元件就只處理左右滑動事件,SlideVertical只處理上下滑動事件

@@ -1,9 +1,10 @@
 import React from 'react'
-import HorizontalSlider from '../../components/Slide/HorizontalSlider';
+import SliderHorizontal from '../../components/Slide/SliderHorizontal';
 import SliderItem from '../../components/Slide/SliderItem';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import IndicatorHome from './IndicatorHome';
 
+// import Test2 from '../../components/Test/Test2';
 // import useStore from '../../utils/hooks/store/useStore';
 
 const Home = () => {
@@ -12,7 +13,7 @@ const Home = () => {
 
   return (
     <div>
-      <HorizontalSlider name='first' render={SliderItem(components)} />
+      <SliderHorizontal name='first' render={SliderItem(components, 'first')} />
     </div>
   );
 };

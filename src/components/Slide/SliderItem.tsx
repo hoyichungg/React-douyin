@@ -1,9 +1,9 @@
 // import React from 'react';
 
-const SliderItem = (components) => (
+const SliderItem = (Components, stratum) => (
   <>
-    {components.map((Component, index) => (
-      <div className="slider-item" data-index={index} key={index}>
+    {Components.map((Component, index) => (
+      <div className="slider-item" data-index={stratum === 'first' && index} key={index}>
         <Component />
       </div>
     ))}
