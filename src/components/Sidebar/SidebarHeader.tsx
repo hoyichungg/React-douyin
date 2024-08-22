@@ -7,11 +7,11 @@ const SidebarHeader = () => {
   return (
     <div className="header">
       <div className="left">下午好</div>
-      <div className="right" >
+      <div className="right">
         <Icon icon="iconamoon:scanner" />
         <span>掃一掃</span>
       </div>
-    </div >
+    </div>
   )
 }
 

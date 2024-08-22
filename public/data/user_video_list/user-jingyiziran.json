@@ -468,9 +468,7 @@
     "video": {
       "play_addr": {
         "uri": "https://sf5-hl-cdn-tos.douyinstatic.com/obj/ies-music/7312815097359977242.mp3",
-        "url_list": [
-          "https://sf3-cdn-tos.douyinstatic.com/obj/ies-music/7312815097359977242.mp3"
-        ],
+        "url_list": ["https://sf3-cdn-tos.douyinstatic.com/obj/ies-music/7312815097359977242.mp3"],
         "width": 720,
         "height": 720,
         "url_key": "7312815110999821094"
@@ -779,9 +777,7 @@
     "video": {
       "play_addr": {
         "uri": "https://sf5-hl-cdn-tos.douyinstatic.com/obj/ies-music/7299837095483427634.mp3",
-        "url_list": [
-          "https://sf6-cdn-tos.douyinstatic.com/obj/ies-music/7299837095483427634.mp3"
-        ],
+        "url_list": ["https://sf6-cdn-tos.douyinstatic.com/obj/ies-music/7299837095483427634.mp3"],
         "width": 720,
         "height": 720,
         "url_key": "7299837103377091379"
@@ -1274,9 +1270,7 @@
     "video": {
       "play_addr": {
         "uri": "https://sf3-cdn-tos.douyinstatic.com/obj/ies-music/7237419344483961604.mp3",
-        "url_list": [
-          "https://sf6-cdn-tos.douyinstatic.com/obj/ies-music/7237419344483961604.mp3"
-        ],
+        "url_list": ["https://sf6-cdn-tos.douyinstatic.com/obj/ies-music/7237419344483961604.mp3"],
         "width": 720,
         "height": 720,
         "url_key": "7237419292600322827"
@@ -1490,9 +1484,7 @@
     "video": {
       "play_addr": {
         "uri": "https://sf5-hl-cdn-tos.douyinstatic.com/obj/ies-music/7194791781903715109.mp3",
-        "url_list": [
-          "https://sf6-cdn-tos.douyinstatic.com/obj/ies-music/7194791781903715109.mp3"
-        ],
+        "url_list": ["https://sf6-cdn-tos.douyinstatic.com/obj/ies-music/7194791781903715109.mp3"],
         "width": 720,
         "height": 720,
         "url_key": "7194791780657793848"
@@ -1852,9 +1844,7 @@
     "video": {
       "play_addr": {
         "uri": "https://sf3-cdn-tos.douyinstatic.com/obj/ies-music/1622288279496712.mp3",
-        "url_list": [
-          "https://sf5-hl-cdn-tos.douyinstatic.com/obj/ies-music/1622288279496712.mp3"
-        ],
+        "url_list": ["https://sf5-hl-cdn-tos.douyinstatic.com/obj/ies-music/1622288279496712.mp3"],
         "width": 720,
         "height": 720,
         "url_key": "6644892793565104910"

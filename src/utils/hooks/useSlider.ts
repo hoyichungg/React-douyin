@@ -1,12 +1,12 @@
-import { useRef, useState, useEffect } from 'react';
-import { checkEvent } from '../check';
-import { _css } from '../dom';
-import { SlideType } from '../const_var';
-import useEventBus from './useEventBus';
+import { useRef, useState, useEffect } from 'react'
+import { checkEvent } from '../check'
+import { _css } from '../dom'
+import { SlideType } from '../const_var'
+import useEventBus from './useEventBus'
 
 const useSlider = (sliderType: number) => {
-  const { emit } = useEventBus();
-  const wrapperEl = useRef(null);
+  const { emit } = useEventBus()
+  const wrapperEl = useRef(null)
 
   const [state, setState] = useState({
     judgeValue: 20,
@@ -19,19 +19,19 @@ const useSlider = (sliderType: number) => {
     start: { x: 0, y: 0, time: 0 },
     move: { x: 0, y: 0 },
     wrapper: { width: 0, height: 0, childrenLength: 0 }
-  });
+  })
 
   /**
    * 初始化
    */
 
   useEffect(() => {
-    const el = wrapperEl.current;
-    if (!el) return;
-    console.log('el', el);
+    const el = wrapperEl.current
+    if (!el) return
+    console.log('el', el)
 
     const updateDimensions = () => {
-      setState(prevState => ({
+      setState((prevState) => ({
         ...prevState,
         wrapper: {
           ...prevState.wrapper,
@@ -39,40 +39,38 @@ const useSlider = (sliderType: number) => {
           height: _css(el, 'height'),
           childrenLength: el.children.length
         }
-      }));
-    };
+      }))
+    }
 
-    updateDimensions(); // 初始化尺寸
+    updateDimensions() // 初始化尺寸
 
     // 監聽resize事件以更新尺寸
-    window.addEventListener('resize', updateDimensions);
+    window.addEventListener('resize', updateDimensions)
 
     return () => {
-      window.removeEventListener('resize', updateDimensions);
-    };
-  }, []);
+      window.removeEventListener('resize', updateDimensions)
+    }
+  }, [])
 
   //機算偏移量transform
   useEffect(() => {
-    if (!wrapperEl.current) return;
+    if (!wrapperEl.current) return
 
-    const t = getSlideOffset(wrapperEl.current);
-    let dx1 = 0, dx2 = 0;
+    const t = getSlideOffset(wrapperEl.current)
+    let dx1 = 0,
+      dx2 = 0
     if (state.type === SlideType.HORIZONTAL) {
-      dx1 = t;
-      console.log(1);
-      
+      dx1 = t
+      console.log(1)
     } else {
-      dx2 = t;
-      console.log(2);
-      
+      dx2 = t
+      console.log(2)
     }
-    _css(wrapperEl.current, 'transform', `translate3d(${dx1}px, ${dx2}px, 0)`);
-    console.log('dx1', dx1);
+    _css(wrapperEl.current, 'transform', `translate3d(${dx1}px, ${dx2}px, 0)`)
+    console.log('dx1', dx1)
 
-  console.log('dx2', dx2);
-
-  }, []);  // 響應類型變化
+    console.log('dx2', dx2)
+  }, []) // 響應類型變化
 
   /**
    * 偵測對應方向上能否允許滑動,例如SlideHorizontal元件就只處理左右滑動事件,SlideVertical只處理上下滑動事件
@@ -132,11 +130,11 @@ const useSlider = (sliderType: number) => {
    * @param e
    * @param el
    * @param name
-  */
+   */
   const slideTouchStart = (e, el: HTMLDivElement, name: string) => {
     if (!checkEvent(e)) return
     _css(el, 'transition-duration', `0ms`)
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
       name,
       start: {
@@ -156,7 +154,7 @@ const useSlider = (sliderType: number) => {
    * @param canNextCb 是否能繼續滑的回調
    * @param notNextCb 不能繼續滑的回調
    * @param slideOtherDirectionCb 滑動其他方向時的回調,目前用於圖集進於放大模式後,上下滑動推出放大模式
-  */
+   */
   const slideTouchMove = (
     e,
     el: HTMLDivElement,
@@ -168,7 +166,7 @@ const useSlider = (sliderType: number) => {
     if (!checkEvent(e)) return
     if (!state.isDown) return
 
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
       move: {
         x: e.touches[0].pageX - prevState.start.x,
@@ -193,7 +191,8 @@ const useSlider = (sliderType: number) => {
         }
         // 獲取偏移量
         const t = getSlideOffset(el) + (isNext ? state.judgeValue : -state.judgeValue)
-        let dx1 = 0, dx2 = 0;
+        let dx1 = 0,
+          dx2 = 0
         // 偏移量加當前手指頭移動的距離就是slide要偏移的值
         if (state.type === SlideType.HORIZONTAL) {
           dx1 = t + state.move.x
@@ -240,8 +239,7 @@ const useSlider = (sliderType: number) => {
         if (gapTime < 150) {
           if (isNext) {
             state.localIndex++
-          }
-          else {
+          } else {
             state.localIndex--
           }
           return nextCb?.(isNext)
@@ -260,7 +258,7 @@ const useSlider = (sliderType: number) => {
    * @param el
    * @param name
    */
-  const slideReset = (e, el: HTMLDivElement, name: string,) => {
+  const slideReset = (e, el: HTMLDivElement, name: string) => {
     if (!checkEvent(e)) return
 
     _css(el, 'transition-duration', `300ms`)
@@ -276,7 +274,7 @@ const useSlider = (sliderType: number) => {
       dx2 = t
     }
     _css(el, 'transform', `translate3d(${dx1}px, ${dx2}px, 0)`)
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
       start: {
         ...prevState.start,
@@ -292,7 +290,7 @@ const useSlider = (sliderType: number) => {
       next: false,
       needCheck: true,
       isDown: false
-    }));
+    }))
 
     setTimeout(() => {
       window.isMoved = false
@@ -310,4 +308,4 @@ const useSlider = (sliderType: number) => {
   }
 }
 
-export default useSlider;
+export default useSlider

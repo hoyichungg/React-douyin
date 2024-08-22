@@ -4536,9 +4536,7 @@
     "video": {
       "play_addr": {
         "uri": "https://sf5-hl-cdn-tos.douyinstatic.com/obj/ies-music/7315433856734333723.mp3",
-        "url_list": [
-          "https://sf3-cdn-tos.douyinstatic.com/obj/ies-music/7315433856734333723.mp3"
-        ],
+        "url_list": ["https://sf3-cdn-tos.douyinstatic.com/obj/ies-music/7315433856734333723.mp3"],
         "width": 720,
         "height": 720,
         "url_key": "7315433880780049179"

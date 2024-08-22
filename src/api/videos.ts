@@ -1,4 +1,4 @@
-import { request } from "../utils/request";
+import { request } from '../utils/request'
 
 export const historyOther = (params, data) => {
   return request({ url: '/video/historyOther', method: 'get', params, data })

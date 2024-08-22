@@ -27,10 +27,10 @@ export async function startMock() {
       }
     ]
   })
-  
+
   mock.onGet('/user/collect').reply(async () => {
-    console.log('/user/collect');
-    
+    console.log('/user/collect')
+
     return [
       200,
       {

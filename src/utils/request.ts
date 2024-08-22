@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import config from "../config";
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import config from '../config'
 
 export const axiosInstance = axios.create({
   baseURL: config.baseUrl,
@@ -21,16 +21,13 @@ axiosInstance.interceptors.request.use(
  * 響應攔截器,無論失敗or成功都會返回{ success: boolean, data: xxx }這類型的數據,沒有reject和拋error
  * 如果有問題,攔截器裡會進行提示。在then裡面會接收到返回值
  */
-axiosInstance.interceptors.response.use(
-  (response: AxiosResponse) => {
-    /**
-     * 響應成功的攔截器,主要是對data做處裡
-     */
-    const { data } = response
-    console.log('response', data, response);
-
-  }
-)
+axiosInstance.interceptors.response.use((response: AxiosResponse) => {
+  /**
+   * 響應成功的攔截器,主要是對data做處裡
+   */
+  const { data } = response
+  console.log('response', data, response)
+})
 
 export interface ApiResponse<T> {
   data: T

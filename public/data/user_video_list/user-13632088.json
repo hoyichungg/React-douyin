@@ -1906,9 +1906,7 @@
     "video": {
       "play_addr": {
         "uri": "https://sf6-cdn-tos.douyinstatic.com/obj/ies-music/7299431129275042610.mp3",
-        "url_list": [
-          "https://sf3-cdn-tos.douyinstatic.com/obj/ies-music/7299431129275042610.mp3"
-        ],
+        "url_list": ["https://sf3-cdn-tos.douyinstatic.com/obj/ies-music/7299431129275042610.mp3"],
         "width": 720,
         "height": 720,
         "url_key": "7299431132851030821"
@@ -6935,9 +6933,7 @@
     "video": {
       "play_addr": {
         "uri": "https://sf5-hl-cdn-tos.douyinstatic.com/obj/ies-music/7188307199007918885.mp3",
-        "url_list": [
-          "https://sf3-cdn-tos.douyinstatic.com/obj/ies-music/7188307199007918885.mp3"
-        ],
+        "url_list": ["https://sf3-cdn-tos.douyinstatic.com/obj/ies-music/7188307199007918885.mp3"],
         "width": 720,
         "height": 720,
         "url_key": "7188307213239290684"

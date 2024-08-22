@@ -37,7 +37,7 @@ export function _css(el, key, value?) {
         el.style.MozTransform =
         el.style.OTransform =
         el.style.transform =
-        value
+          value
     } else {
       el.style[key] = value
     }

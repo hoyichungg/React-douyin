@@ -1,8 +1,5 @@
-
 const SliderVerticalInfinite = () => {
-  return (
-    <div>SliderVerticalInfinite</div>
-  )
+  return <div>SliderVerticalInfinite</div>
 }
 
 SliderVerticalInfinite.propTypes = {}

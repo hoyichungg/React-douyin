@@ -8,6 +8,6 @@ const SliderItem = (Components, stratum) => (
       </div>
     ))}
   </>
-);
+)
 
-export default SliderItem;
+export default SliderItem

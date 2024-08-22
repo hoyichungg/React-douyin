@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { Icon } from '@iconify/react'
 
 import '../../styles/components/Sidebar/SideCard.scss'
@@ -23,7 +23,7 @@ const SideCard = ({ title, items }) => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SideCard;
+export default SideCard
